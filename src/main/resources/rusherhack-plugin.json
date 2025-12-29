@@ -1,0 +1,13 @@
+{
+  "Plugin-Class": "lol.tilley.favorites.PluginMain",
+  "Name": "${project.plugin_name}",
+  "Version": "${project.plugin_version}",
+  "Description": "add favorite modules panel to the clickgui",
+  "URL": "https://github.com/tillay-rh-plugins/favorite-modules",
+  "Authors": [
+    "tilley"
+  ],
+  "Minecraft-Versions": [
+    "${project.minecraft_version}"
+  ]
+}
