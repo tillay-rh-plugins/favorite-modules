@@ -2,17 +2,14 @@ package lol.tilley.favorites;
 
 import com.google.gson.*;
 import org.rusherhack.client.api.RusherHackAPI;
-import org.rusherhack.client.api.events.client.EventUpdate;
 import org.rusherhack.client.api.events.client.screen.EventScreen;
 import org.rusherhack.client.api.feature.command.Command;
 import org.rusherhack.client.api.feature.module.IModule;
 import org.rusherhack.client.api.ui.panel.IPanelItem;
 import org.rusherhack.client.api.ui.panel.PanelBase;
-import org.rusherhack.client.api.utils.ChatUtils;
 import org.rusherhack.core.command.annotations.CommandExecutor;
 import org.rusherhack.core.event.stage.Stage;
 import org.rusherhack.core.event.subscribe.Subscribe;
-import org.rusherhack.core.utils.Timer;
 
 import java.io.File;
 import java.io.FileReader;
@@ -42,6 +39,7 @@ public class FavCommand extends Command {
 			}
 		}
 
+		// See onScreenChange for rant about why I need this
 		if (panelConfigFile.exists()) {
 			try (java.io.FileReader fileReader = new java.io.FileReader(panelConfigFile)) {
 				favoritesPanel.deserialize(JsonParser.parseReader(fileReader).getAsJsonObject());
@@ -49,6 +47,7 @@ public class FavCommand extends Command {
 				this.pluginMain.getLogger().error(exception.getMessage());
 			}
 		}
+
 		RusherHackAPI.getEventBus().subscribe(this);
 	}
 
@@ -91,6 +90,7 @@ public class FavCommand extends Command {
 		}
 	}
 
+	// John pls add this to api
 	private IModule getModuleByReferenceKey(String referenceKey) {
 		for (IModule module : RusherHackAPI.getModuleManager().getFeatures()) {
 			if (referenceKey.equals(module.getReferenceKey())) {
