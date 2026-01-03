@@ -28,7 +28,6 @@ public class PluginMain extends Plugin {
 		RusherHackAPI.getEventBus().unsubscribe(this);
 		this.favoritesPanel = (PanelBase<?>) clickGuiHandler.createPanel("Favorites");
 		clickGuiHandler.addPanel(favoritesPanel);
-		this.getLogger().info(String.valueOf(favoritesPanel.shouldSerialize(true)));
 		RusherHackAPI.getCommandManager().registerFeature(new FavCommand(this));
 	}
 
