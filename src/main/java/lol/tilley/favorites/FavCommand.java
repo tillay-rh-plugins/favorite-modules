@@ -18,13 +18,12 @@ import java.util.HashMap;
 
 public class FavCommand extends Command {
 	private final PluginMain pluginMain;
-	private final File configFile;
+	private File configFile = RusherHackAPI.getConfigPath().resolve("favorites.json").toFile();
 	public final HashMap<IModule, IPanelItem> modules = new HashMap<>();
 
-	public FavCommand(PluginMain pluginMain, File configFile) {
+	public FavCommand(PluginMain pluginMain) {
 		super("favs", "Add or remove modules from favorites");
 		this.pluginMain = pluginMain;
-		this.configFile = configFile;
 
 		if (configFile.exists()) {
 			try (FileReader fileReader = new FileReader(configFile)) {
@@ -36,7 +35,6 @@ public class FavCommand extends Command {
 				this.pluginMain.getLogger().error(exception.getMessage());
 			}
 		}
-
 	}
 
 	@CommandExecutor(subCommand = "add")

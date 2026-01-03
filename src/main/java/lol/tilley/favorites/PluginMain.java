@@ -8,17 +8,13 @@ import org.rusherhack.client.api.ui.panel.PanelHandlerBase;
 import org.rusherhack.core.event.stage.Stage;
 import org.rusherhack.core.event.subscribe.Subscribe;
 
-import java.io.File;
-
 public class PluginMain extends Plugin {
-	public File configFile = RusherHackAPI.getConfigPath().resolve("favorites.json").toFile();
 	private final PanelHandlerBase clickGuiHandler = RusherHackAPI.getThemeManager().getClickGuiHandler();
 	private PanelBase<?> favoritesPanel;
 
 	@Override
 	public void onLoad() {
 		this.getLogger().info("Plugin favorite-modules loaded");
-		RusherHackAPI.getCommandManager().registerFeature(new FavCommand(this, configFile));
 		RusherHackAPI.getEventBus().subscribe(this);
 	}
 
@@ -31,6 +27,7 @@ public class PluginMain extends Plugin {
 	private void onSuitableInitEvent(EventRender2D event) {
 		this.favoritesPanel = (PanelBase<?>) clickGuiHandler.createPanel("Favorites");
 		clickGuiHandler.addPanel(favoritesPanel);
+		RusherHackAPI.getCommandManager().registerFeature(new FavCommand(this));
 		RusherHackAPI.getEventBus().unsubscribe(this);
 	}
 
